@@ -1,5 +1,9 @@
-import express from 'express';
-import { createProvisionalPanel } from '../controllers/panelController.js';
+import express from "express";
+import { createPanel } from "../controllers/panelController.js";
+
 const router = express.Router();
-router.post('/create', createProvisionalPanel);
+
+// Route de création après paiement
+router.post("/create", createPanel);
+
 export default router;
