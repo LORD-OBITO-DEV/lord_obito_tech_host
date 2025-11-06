@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LORD OBITO TECH HOST</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+    body { background: #0b0f19; color: white; line-height: 1.6; }
+    header { background: #0f172a; padding: 1.2rem; text-align: center; }
+    header h1 { color: #38bdf8; }
+    nav { margin-top: .5rem; }
+    nav a { color: white; margin: 0 1rem; text-decoration: none; font-weight: 600; }
+    nav a:hover { color: #38bdf8; }
+
+    .hero { text-align: center; padding: 3rem 1rem; background: linear-gradient(180deg, #0b0f19, #16213e); }
+    .hero h2 { font-size: 2rem; color: #38bdf8; margin-bottom: 1rem; }
+    .hero p { max-width: 600px; margin: 0 auto; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; padding: 2rem; }
+    .card { background: #111827; border-radius: 12px; padding: 1.5rem; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+    .card h3 { color: #38bdf8; }
+    .card p { font-size: 0.9rem; margin: 0.5rem 0; }
+    .card button { background: #38bdf8; color: #0f172a; border: none; padding: .7rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+    .card button:hover { background: #0ea5e9; }
+
+    footer { text-align: center; padding: 2rem 1rem; background: #0f172a; color: #ccc; font-size: 0.9rem; }
+    @media(max-width:600px){ .hero h2{font-size:1.5rem;} }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>LORD OBITO TECH HOST</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="about.html">Notre Équipe</a>
+      <a href="checkout.html">Acheter un panel</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Vos panels, rapides et sécurisés ⚡</h2>
+    <p>Choisissez votre service préféré (Node.js, Python ou Minecraft), payez en toute sécurité et recevez votre panel par email automatiquement.</p>
+  </section>
+
+  <section class="cards">
+    <div class="card">
+      <h3>Panel Node.js</h3>
+      <p>Développez vos bots et API puissantes.</p>
+      <button onclick="window.location.href='checkout.html?type=nodejs'">Voir les panels</button>
+    </div>
+    <div class="card">
+      <h3>Panel Python</h3>
+      <p>Hébergez vos bots et IA intelligentes.</p>
+      <button onclick="window.location.href='checkout.html?type=python'">Voir les panels</button>
+    </div>
+    <div class="card">
+      <h3>Panel Minecraft</h3>
+      <p>Louez votre serveur Minecraft performant.</p>
+      <button onclick="window.location.href='checkout.html?type=minecraft'">Voir les panels</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 LORD OBITO TECH HOST — Propulsé par ʟᴏʀᴅ_ᴏʙɪᴛᴏ-ᴅᴇᴠ</p>
+  </footer>
+</body>
+</html>
