@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Achat Panel | LORD OBITO TECH HOST</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATUTe-0TB84uNjk9DC0uxEkJbgz9TyN4N-zfb3UOC_9W066Tjc_Fuk_zsSVsE1KS1tdd5yGVhWvASKUc&currency=EUR"></script>
+  <style>
+    body { font-family: Poppins, sans-serif; background:#0b0f19; color:white; margin:0; text-align:center; }
+    h2 { color:#38bdf8; margin-top:1rem; }
+    form { background:#111827; display:inline-block; margin-top:2rem; padding:2rem; border-radius:12px; text-align:left; }
+    label { display:block; margin-top:1rem; }
+    input, select { width:100%; padding:.6rem; border-radius:8px; border:none; margin-top:.3rem; }
+    button { margin-top:1.2rem; width:100%; padding:.7rem; background:#38bdf8; color:#0f172a; border:none; border-radius:8px; font-weight:600; cursor:pointer; }
+    .payment-options { margin-top:2rem; }
+    .payment-options button { margin:.5rem; width:auto; padding:.8rem 1.2rem; }
+  </style>
+</head>
+<body>
+  <h2>Acheter un panel</h2>
+
+  <form id="panelForm">
+    <label>Nom du panel</label>
+    <input type="text" id="panelName" required />
+
+    <label>Nom d’utilisateur</label>
+    <input type="text" id="username" required />
+
+    <label>Mot de passe</label>
+    <input type="password" id="password" required />
+
+    <label>Email de réception</label>
+    <input type="email" id="email" required />
+
+    <label>Type de service</label>
+    <select id="service" required>
+      <option value="nodejs">Node.js</option>
+      <option value="python">Python</option>
+      <option value="minecraft">Minecraft</option>
+    </select>
+
+    <label>Capacité</label>
+    <select id="capacity" required>
+      <option value="1">1 Go</option>
+      <option value="3">3 Go</option>
+      <option value="10">10 Go</option>
+      <option value="20">20 Go</option>
+      <option value="50">50 Go</option>
+      <option value="unlimited">Illimité</option>
+    </select>
+
+    <label>Durée</label>
+    <select id="duration" required>
+      <option value="7">7 jours</option>
+      <option value="30">1 mois</option>
+    </select>
+
+    <button type="button" onclick="calculatePrice()">Afficher les options de paiement</button>
+  </form>
+
+  <div id="price"></div>
+
+  <div class="payment-options" id="paymentSection" style="display:none;">
+    <div id="paypal-button-container"></div>
+
+    <button onclick="wavePayment()">Payer par Wave</button>
+    <button onclick="orangePayment()">Payer par Orange Money</button>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      const service = document.getElementById("service").value;
+      const capacity = document.getElementById("capacity").value;
+      const duration = document.getElementById("duration").value;
+
+      let basePrice = 0;
+
+      const prices = {
+        nodejs: { "1":1.5, "3":2, "10":6, "20":6.9, "50":8.9, "unlimited":10 },
+        python: { "1":2, "3":2.5, "10":5, "20":6, "50":9, "unlimited":12 },
+        minecraft: { "1":2.06, "3":2.57, "10":5.15, "20":6.18, "50":9.27 }
+      };
+
+      basePrice = prices[service][capacity];
+      const finalPrice = duration === "30" ? basePrice * 4 : basePrice;
+
+      document.getElementById("price").innerHTML = `<h3>Prix total : ${finalPrice.toFixed(2)} €</h3>`;
+      document.getElementById("paymentSection").style.display = "block";
+
+      paypal.Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [{ amount: { value: finalPrice.toFixed(2) } }],
+          });
+        },
+        onApprove: (data, actions) => {
+          alert("Paiement PayPal réussi ✅\nVotre panel sera envoyé à votre adresse mail !");
+        },
+      }).render("#paypal-button-container");
+    }
+
+    function wavePayment() {
+      alert("Après le paiement Wave, envoyez une capture à WhatsApp : +2250712668494 avec les détails du panel souhaité ✅");
+    }
+
+    function orangePayment() {
+      alert("Après le paiement Orange Money, envoyez une capture à WhatsApp : +2250712668494 avec les détails du panel souhaité ✅");
+    }
+  </script>
+</body>
+</html>
