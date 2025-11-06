@@ -1,26 +1,29 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import path from "path";
-import { fileURLToPath } from "url";
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const paypalRoutes = require('./paypalController');
+const path = require('path');
 
-import paypalRoutes from "./routes/paypalRoutes.js";
-import panelRoutes from "./routes/panelRoutes.js";
-
-dotenv.config();
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+const PORT = process.env.PORT || 3000;
 
-app.use("/api/paypal", paypalRoutes);
-app.use("/api/panel", panelRoutes);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "checkout.html"));
+app.use('/paypal', paypalRoutes);
+
+// Page par défaut
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Serveur en ligne sur le port ${PORT}`));
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
+
+app.get('/checkout', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'checkout.html'));
+});
+
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
